@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>스킨폴드 캘리퍼 계산기</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <!-- 입력창 -->
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        스킨폴드 캘리퍼 계산기
+                    </div>
+                    <div class="card-body">
+                        <!-- 성별 선택 -->
+                        <label>성별</label>
+                        <div class="form-group form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="male" value="male"
+                                onchange="genderChange($(this))" checked autocomplete="off"/>
+                            <label for="male">남성</label>
+                        </div>
+                        <div class="form-group form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="gender" id="female" value="female"
+                                onchange="genderChange($(this))" autocomplete="off"/>
+                            <label for="female">여성</label>
+                        </div>
+                        <!-- /성별 선택 -->
+    
+                        <div class="form-group">
+                            <label for="age">나이(만)</label>
+                            <input type="number" class="form-control" id="age" placeholder="" min="1" autocomplete="off"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="weigth">체중(kg)</label>
+                            <input type="number" class="form-control" id="weigth" placeholder="" min="1" autocomplete="off"/>
+                        </div>
+                        <!-- 남성 -->
+                        <div class="male-div">
+                            <div class="form-group">
+                                <label for="chest">가슴 접힘(mm)</label>
+                                <input type="number" class="form-control" id="chest" placeholder="" max="60" min="0" autocomplete="off"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="abdominal">복부 접힘(mm)</label>
+                                <input type="number" class="form-control" id="abdominal" placeholder="" max="60" min="0" autocomplete="off"/>
+                            </div>
+                        </div>
+                        <!-- /남성 -->
+                        <!-- 여성 -->
+                        <div class="female-div" style="display: none;">
+                            <div class="form-group">
+                                <label for="tricep">삼두박근 접힘(mm)</label>
+                                <input type="number" class="form-control" id="tricep" placeholder="" max="60" min="0" autocomplete="off"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="suprailiac">상장골 접힘(mm)</label>
+                                <input type="number" class="form-control" id="suprailiac" placeholder="" max="60" min="0" autocomplete="off"/>
+                            </div>
+                        </div>
+                        <!-- /여성 -->
+                        <div class="form-group">
+                            <label for="thigh">대퇴전면 접힘(mm)</label>
+                            <input type="number" class="form-control" id="thigh" placeholder="" max="60" min="0" autocomplete="off"/>
+                        </div>
+    
+                        <!-- 버튼 -->
+                        <div>
+                            <button type="button" class="btn btn-outline-primary">계산하기</button>
+                            <button type="button" class="btn btn-outline-secondary" onclick="doClear()">초기화</button>
+                        </div>
+                        <!-- /버튼 -->
+                    </div>
+                </div>
+            </div>
+            <!-- /입력창 -->
+            <!-- 결과창 -->
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        결과
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+            <!-- /결과창 -->
+        </div>
+    </div>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
