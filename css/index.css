@@ -21,7 +21,8 @@ time, mark, audio, video {
 	border: 0;
 	font-size: 100%;
     font: inherit;
-    font-family: 'Noto Sans KR', sans-serif;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-weight: 300;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -48,6 +49,16 @@ table {
 	border-spacing: 0;
 }
 
+.btn {
+	font-size: 14px;
+	margin-right: 10px;
+}
+
+.card {
+	margin: 10px 0;
+	font-size: 14px;
+}
+
 .card-body {
 	padding: 20px;
 }
@@ -57,10 +68,22 @@ table {
 }
 
 .card-body input[type="radio"] {
-	position: relative;
-	top: -4px;
+	margin-top: -11px;
+	vertical-align: middle;
+}
+
+.form-check {
+	margin-left: 5vw;
 }
 
 .col-lg-6 {
 	margin: 20px 0;
+}
+
+label:not(.input-label) {
+	color: #007bff;
+}
+
+tr > td:first-child {
+	color: #007bff;
 }
