@@ -22,7 +22,7 @@
     <div class="container">
         <div class="row">
             <!-- 입력창 -->
-            <div class="col-lg-6">
+            <div class="col-lg-6 calculator">
                 <div class="card">
                     <div class="card-header">
                         스킨폴드 캘리퍼 계산기
@@ -32,33 +32,33 @@
                         <label>성별</label>
                         <div class="form-group form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="gender" id="male" value="male"
-                                onchange="genderChange($(this))" checked autocomplete="off"/>
-                            <label for="male">남성</label>
+                                onchange="genderChange($(this))" checked autocomplete="off" />
+                            <label class="input-label" for="male">남성</label>
                         </div>
                         <div class="form-group form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="gender" id="female" value="female"
-                                onchange="genderChange($(this))" autocomplete="off"/>
-                            <label for="female">여성</label>
+                                onchange="genderChange($(this))" autocomplete="off" />
+                            <label class="input-label"  for="female">여성</label>
                         </div>
                         <!-- /성별 선택 -->
-    
+
                         <div class="form-group">
                             <label for="age">나이(만)</label>
-                            <input type="number" class="form-control" id="age" placeholder="" min="1" autocomplete="off"/>
+                            <input type="number" class="form-control" id="age" placeholder="" min="1" max="150" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label for="weigth">체중(kg)</label>
-                            <input type="number" class="form-control" id="weigth" placeholder="" min="1" autocomplete="off"/>
+                            <input type="number" class="form-control" id="weigth" placeholder="" min="1" max="200" autocomplete="off" step="0.01"/>
                         </div>
                         <!-- 남성 -->
                         <div class="male-div">
                             <div class="form-group">
                                 <label for="chest">가슴 접힘(mm)</label>
-                                <input type="number" class="form-control" id="chest" placeholder="" max="60" min="0" autocomplete="off"/>
+                                <input type="number" class="form-control" id="chest" placeholder="" max="60" min="0" autocomplete="off" step="0.01"/>
                             </div>
                             <div class="form-group">
                                 <label for="abdominal">복부 접힘(mm)</label>
-                                <input type="number" class="form-control" id="abdominal" placeholder="" max="60" min="0" autocomplete="off"/>
+                                <input type="number" class="form-control" id="abdominal" placeholder="" max="60" min="0" autocomplete="off" step="0.01"/>
                             </div>
                         </div>
                         <!-- /남성 -->
@@ -66,22 +66,22 @@
                         <div class="female-div" style="display: none;">
                             <div class="form-group">
                                 <label for="tricep">삼두박근 접힘(mm)</label>
-                                <input type="number" class="form-control" id="tricep" placeholder="" max="60" min="0" autocomplete="off"/>
+                                <input type="number" class="form-control" id="tricep" placeholder="" max="60" min="0" autocomplete="off" step="0.01"/>
                             </div>
                             <div class="form-group">
                                 <label for="suprailiac">상장골 접힘(mm)</label>
-                                <input type="number" class="form-control" id="suprailiac" placeholder="" max="60" min="0" autocomplete="off"/>
+                                <input type="number" class="form-control" id="suprailiac" placeholder="" max="60" min="0" autocomplete="off" step="0.01"/>
                             </div>
                         </div>
                         <!-- /여성 -->
                         <div class="form-group">
                             <label for="thigh">대퇴전면 접힘(mm)</label>
-                            <input type="number" class="form-control" id="thigh" placeholder="" max="60" min="0" autocomplete="off"/>
+                            <input type="number" class="form-control" id="thigh" placeholder="" max="60" min="0" autocomplete="off" step="0.01"/>
                         </div>
     
                         <!-- 버튼 -->
                         <div>
-                            <button type="button" class="btn btn-outline-primary">계산하기</button>
+                            <button type="button" class="btn btn-outline-primary" onclick="doCalculate(age, weigth, chest, abdominal, tricep, suprailiac, thigh)">계산하기</inpu>
                             <button type="button" class="btn btn-outline-secondary" onclick="doClear()">초기화</button>
                         </div>
                         <!-- /버튼 -->
@@ -96,7 +96,104 @@
                         결과
                     </div>
                     <div class="card-body">
+                        <table class="table table-bordered result-table">
+                            <colgroup>
+                                <col style="width: 60%;">
+                                <col style="width: 40%;">
+                            </colgroup>
+                            <tbody>
+                                <td>체지방률 ( % )</td>
+                                <td id="body-fat" colspan="3"></td>
+                            </tbody>
+                            <tbody>
+                                <td>체지방률 분류</td>
+                                <td id="body-fat-clas"></td>
+                            </tbody>
+                            <tbody>
+                                <td>체지방량 ( kg )</td>
+                                <td id="fat-mass"></td>
+                            </tbody>
+                            <tbody>
+                                <td>제지방량 ( kg )</td>
+                                <td id="lean-mass"></td>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
+                <div class="card male-clas">
+                    <div class="card-header">
+                        체지방률 분류 ( 남성 )
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <colgroup>
+                                <col style="width: 60%;">
+                                <col style="width: 40%;">
+                            </colgroup>
+                            <tbody>
+                                <td>저체지방 위험</td>
+                                <td>5% 이하</td>
+                            </tbody>
+                            <tbody>
+                                <td>매우 마름</td>
+                                <td>5 - 8%</td>
+                            </tbody>
+                            <tbody>
+                                <td>마름</td>
+                                <td>8 - 12%</td>
+                            </tbody>
+                            <tbody>
+                                <td>보통</td>
+                                <td>12 - 20%</td>
+                            </tbody>
+                            <tbody>
+                                <td>과지방</td>
+                                <td>20 - 30%</td>
+                            </tbody>
+                            <tbody>
+                                <td>고도비만</td>
+                                <td>30% 이상</td>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card female-clas" style="display: none;">
+                    <div class="card-header">
+                        체지방률 분류 ( 여성 )
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <colgroup>
+                                <col style="width: 60%;">
+                                <col style="width: 40%;">
+                            </colgroup>
+                            <tbody>
+                                <td>저체지방 위험</td>
+                                <td>15% 이하</td>
+                            </tbody>
+                            <tbody>
+                                <td>매우 마름</td>
+                                <td>15 - 18%</td>
+                            </tbody>
+                            <tbody>
+                                <td>마름</td>
+                                <td>18 - 22%</td>
+                            </tbody>
+                            <tbody>
+                                <td>보통</td>
+                                <td>22 - 30%</td>
+                            </tbody>
+                            <tbody>
+                                <td>과지방</td>
+                                <td>30 - 40%</td>
+                            </tbody>
+                            <tbody>
+                                <td>고도비만</td>
+                                <td>40% 이상</td>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
