@@ -77,3 +77,19 @@ function showResult(fat, bodyFatClas, fatMass, leanMass) {
     $(".result-table").find('tr:eq(2)').find('td:eq(1)').text(fatMass.toFixed(1));
     $(".result-table").find('tr:eq(3)').find('td:eq(1)').text(leanMass.toFixed(1));
 }
+
+function checkNumber(obj) {
+    let numReg = /^[1-9][0-9]{0,2}$/g;
+    let num = obj.val();
+    if (!numReg.test(num)) {
+        obj.val(num.replace(/[^0-9+]/g,''));
+    }
+}
+
+function checkFloat(obj) {
+    let numReg = /^[0-9\.]$/g;
+    let num = obj.val();
+    if (!numReg.test(num)) { 
+        obj.val(num.replace(/[^0-9\.]/gi,''));
+    }
+}
