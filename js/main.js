@@ -1,3 +1,13 @@
+$(document).ready(function() {
+    $('#age').inputmask('integer',{min:0, max:150, rightAlign: false});
+    $('#weigth').inputmask('decimal',{min:0, max:200, rightAlign: false, digits: 2});
+    $('#chest').inputmask('decimal',{min:0, max:70, rightAlign: false, digits: 2});
+    $('#abdominal').inputmask('decimal',{min:0, max:70, rightAlign: false, digits: 2});
+    $('#tricep').inputmask('decimal',{min:0, max:70, rightAlign: false, digits: 2});
+    $('#suprailiac').inputmask('decimal',{min:0, max:70, rightAlign: false, digits: 2});
+    $('#thigh').inputmask('decimal',{min:0, max:70, rightAlign: false, digits: 2});
+});
+
 function genderChange(obj) {
     if (obj.val() == "male") {
         $('.female-div').hide();
@@ -15,21 +25,21 @@ function genderChange(obj) {
 
 function doClear() {
     $('input:not(":radio")').val('');
-    for (let i = 0; i < 4; i++) {
+    for (var i = 0; i < 4; i++) {
         $(".result-table").find('tr:eq(' + i + ')').find('td:eq(1)').text("");
     }
 }
 
 function doCalculate(age, weigth, chest, abdominal, tricep, suprailiac, thigh) {
-    let _age = parseInt(age.value);
-    let _weigth = parseFloat(weigth.value);
-    let _chest = parseFloat(chest.value);
-    let _abdominal = parseFloat(abdominal.value);
-    let _tricep = parseFloat(tricep.value);
-    let _suprailiac = parseFloat(suprailiac.value);
-    let _thigh = parseFloat(thigh.value);
-    let gender = $('input[name="gender"]:checked').val();
-    let total, fat, bodyFatClas, fatMass, leanMass;
+    var _age = parseInt(age.value);
+    var _weigth = parseFloat(weigth.value);
+    var _chest = parseFloat(chest.value);
+    var _abdominal = parseFloat(abdominal.value);
+    var _tricep = parseFloat(tricep.value);
+    var _suprailiac = parseFloat(suprailiac.value);
+    var _thigh = parseFloat(thigh.value);
+    var gender = $('input[name="gender"]:checked').val();
+    var total, fat, bodyFatClas, fatMass, leanMass;
 
     if (gender === "male") {
         total = _chest + _abdominal + _thigh;
