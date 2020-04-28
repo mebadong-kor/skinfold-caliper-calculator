@@ -42,6 +42,25 @@ function doCalculate(age, weigth, chest, abdominal, tricep, suprailiac, thigh) {
     var total, fat, bodyFatClas, fatMass, leanMass;
 
     if (gender === "male") {
+
+        if (isNaN(_age)) {
+            showModal("나이");
+            return;
+        } else if (isNaN(_weigth)) {
+            showModal("체중");
+            return;
+        } else if (isNaN(_chest)) {
+            showModal("가슴 접힘");
+            return;
+        } else if (isNaN(_abdominal)) {
+            showModal("복부 접힘");
+            return;
+        } else if (isNaN(_thigh)) {
+            showModal("대퇴전면 접힘");
+            return;
+        }
+
+
         total = _chest + _abdominal + _thigh;
         fat = 495 / (1.10938 - (0.0008267 * total) + (0.0000016 * Math.pow(total, 2)) - (0.0002574 * _age)) - 450;
         if (fat <= 5) {
@@ -58,6 +77,24 @@ function doCalculate(age, weigth, chest, abdominal, tricep, suprailiac, thigh) {
             bodyFatClas = "고도비만";
         }
     } else if (gender === "female") {
+
+        if (isNaN(_age)) {
+            showModal("나이");
+            return;
+        } else if (isNaN(_weigth)) {
+            showModal("체중");
+            return;
+        } else if (isNaN(_tricep)) {
+            showModal("삼두박근 접힘");
+            return;
+        } else if (isNaN(_suprailiac)) {
+            showModal("상장골 접힘");
+            return;
+        } else if (isNaN(_thigh)) {
+            showModal("대퇴전면 접힘");
+            return;
+        }
+
         total = _tricep + _suprailiac + _thigh;
         fat = 495 / (1.0994921 - (0.0009929 * total) + (0.0000023 * Math.pow(total, 2)) - (0.0001392 * _age)) - 450;
         if (fat <= 15) {
@@ -86,4 +123,10 @@ function showResult(fat, bodyFatClas, fatMass, leanMass) {
     $(".result-table").find('tr:eq(1)').find('td:eq(1)').text(bodyFatClas);
     $(".result-table").find('tr:eq(2)').find('td:eq(1)').text(fatMass.toFixed(1));
     $(".result-table").find('tr:eq(3)').find('td:eq(1)').text(leanMass.toFixed(1));
+}
+
+function showModal(text) {
+    $(".modal-body").html(text + " 을(를) 입력하세요.");
+
+    $("#alertModal").modal('show');
 }
